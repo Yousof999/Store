@@ -1,0 +1,11 @@
+.main-Card {
+    min-height: 550px;
+}
+
+.img {
+    background-color: rgba(0, 0, 0, 0.338);
+}
+
+.content {
+    background-color: #cccccc30;
+}

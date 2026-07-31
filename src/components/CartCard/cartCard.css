@@ -1,0 +1,21 @@
+.img {
+    background-color: rgba(0, 0, 0, 0.338);
+}
+
+.cart-card {
+    background-color: #cccccc30;
+    height: 100%;
+    padding-left: 40px;
+    text-align: center;
+}
+
+.c-content {
+    line-height: 1.7;
+    font-size: 18px;
+}
+
+.price {
+    margin: 30px 0;
+    font-size: 20px;
+    font-weight: 700;
+}
