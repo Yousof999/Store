@@ -32,7 +32,7 @@ export default function NavBar(props) {
                         category.map((category)=>{
                             return(
                                 <li><Link onClick={()=> {
-                                    let List = document.querySelector("ul")
+let List = document.querySelector("ul")
                                     List.style.top = "-1500px"
                                 }} to={`/category/${category}`} class=" category text-decoration-none">{category}</Link></li>
                             )
@@ -40,7 +40,7 @@ export default function NavBar(props) {
                     }
                 </ul>
                 <Link id="Cart-btn" className="nav-link" to="/cart">Cart {props.Cart}</Link>
-            </div>
+            </div>                                    
         </nav>
     )
 }

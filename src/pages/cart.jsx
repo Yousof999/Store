@@ -20,6 +20,11 @@ export default function Cart(props) {
                         )
                     })
                 }
+                <button onClick={()=> {
+                    props.Cart.length = 0
+                    setCount(count + 1)
+                    alert("Your Order Has Been Placed")
+                }} className="btn btn-success">Place Order</button>
             </div>
         </>
     )

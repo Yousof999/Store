@@ -18,7 +18,7 @@ export default function Category(props) {
     return (
         <>
             <div className="container">
-                <h1 className="my-4">Category {params.categoryName}</h1>
+                <h1>Category {params.categoryName}</h1>
                 <div className="row">
                     {
                         data.map((product) => {

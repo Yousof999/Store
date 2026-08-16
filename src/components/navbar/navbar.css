@@ -33,7 +33,7 @@ nav ul {
 
 nav ul li {
     padding: 10px;
-    border-bottom: 2px solid black;
+    border-left: 2px solid black;
     transition: 0.3s;
 }
 
