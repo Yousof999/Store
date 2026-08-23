@@ -25,9 +25,18 @@
 .empty-cart h2 { font-family: Georgia, serif; font-size: 2.5rem; font-weight: 400; margin: 8px 0 10px; }
 .empty-cart p { color: #777d78; margin: 0 auto 25px; }
 .empty-link { display: inline-block; max-width: 250px; text-decoration: none; }
+.confirmation-backdrop { align-items: center; background: rgba(23,34,31,0.68); display: flex; inset: 0; justify-content: center; padding: 20px; position: fixed; z-index: 10; }
+.confirmation-dialog { background: #f5f3ee; color: #17221f; max-width: 440px; padding: 48px; position: relative; width: 100%; }
+.confirmation-close { background: transparent; border: 0; color: #17221f; cursor: pointer; font-size: 1.8rem; line-height: 1; padding: 4px; position: absolute; right: 18px; top: 16px; }
+.confirmation-mark { align-items: center; background: #e6b94d; border-radius: 50%; display: flex; font-size: 1.5rem; height: 52px; justify-content: center; margin-bottom: 28px; width: 52px; }
+.confirmation-dialog .eyebrow { color: #b84e35; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.13em; margin: 0 0 15px; text-transform: uppercase; }
+.confirmation-dialog h2 { font-family: Georgia, serif; font-size: 2.6rem; font-weight: 400; letter-spacing: -0.05em; line-height: 0.95; margin: 0 0 16px; }
+.confirmation-copy { color: #777d78; font-size: 0.9rem; line-height: 1.6; margin: 0 0 28px; }
+.confirmation-action { text-align: left; }
 
 @media (max-width: 768px) {
 	.cart-page { padding-top: 94px; }
 	.cart-layout { display: block; }
 	.order-summary { margin-top: 28px; position: static; }
+	.confirmation-dialog { padding: 40px 28px 28px; }
 }

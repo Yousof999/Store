@@ -1,9 +1,16 @@
 import CartCard from "../../components/CartCard/cartCard";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import './cart.css'
 
 export default function Cart(props) {
+    const [showConfirmation, setShowConfirmation] = useState(false)
     const total = props.Cart.reduce((sum, product) => sum + product.price, 0)
+
+    function placeOrder() {
+        props.clearCart()
+        setShowConfirmation(true)
+    }
 
     return(
         <main className="cart-page">
@@ -25,7 +32,7 @@ export default function Cart(props) {
                             <div className="summary-line"><span>Subtotal</span><strong>${total.toFixed(2)}</strong></div>
                             <div className="summary-line"><span>Delivery</span><strong className="free">Free</strong></div>
                             <div className="summary-total"><span>Total</span><strong>${total.toFixed(2)}</strong></div>
-                            <button onClick={() => { props.clearCart(); alert("Your order has been placed") }} className="place-order">Place order <span aria-hidden="true">&#8594;</span></button>
+                            <button onClick={placeOrder} className="place-order">Place order <span aria-hidden="true">&#8594;</span></button>
                             <Link className="continue-shopping" to="/">Continue shopping</Link>
                         </aside>
                     </div>
@@ -38,6 +45,18 @@ export default function Cart(props) {
                     </section>
                 )}
             </div>
+            {showConfirmation && (
+                <div className="confirmation-backdrop" role="presentation" onClick={() => setShowConfirmation(false)}>
+                    <section className="confirmation-dialog" role="dialog" aria-modal="true" aria-labelledby="confirmation-title" onClick={(event) => event.stopPropagation()}>
+                        <button className="confirmation-close" onClick={() => setShowConfirmation(false)} aria-label="Close confirmation">&#215;</button>
+                        <span className="confirmation-mark" aria-hidden="true">&#10003;</span>
+                        <p className="eyebrow">Order confirmed</p>
+                        <h2 id="confirmation-title">Thank you for your order.</h2>
+                        <p className="confirmation-copy">Your selection is on its way. We hope it finds a beautiful place in your home.</p>
+                        <button className="place-order confirmation-action" onClick={() => setShowConfirmation(false)}>Continue shopping <span aria-hidden="true">&#8594;</span></button>
+                    </section>
+                </div>
+            )}
         </main>
     )
 }
