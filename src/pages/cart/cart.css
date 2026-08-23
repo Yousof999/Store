@@ -1,0 +1,33 @@
+.cart-page {
+	background: #f5f3ee;
+	color: #17221f;
+	min-height: 100vh;
+	padding: 112px 0 85px;
+}
+
+.cart-header { align-items: end; border-bottom: 1px solid #d5d3cc; display: flex; justify-content: space-between; padding-bottom: 38px; }
+.cart-header .eyebrow, .order-summary .eyebrow { color: #b84e35; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.13em; margin: 0 0 15px; text-transform: uppercase; }
+.cart-header h1 { font-family: Georgia, serif; font-size: clamp(3.2rem, 7vw, 6rem); font-weight: 400; letter-spacing: -0.07em; line-height: 0.85; margin: 0; }
+.cart-header > span { color: #777d78; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; }
+.cart-layout { align-items: start; display: grid; gap: 55px; grid-template-columns: minmax(0, 1.4fr) minmax(270px, 0.6fr); padding-top: 38px; }
+.cart-items { display: grid; gap: 16px; }
+.order-summary { background: #e6b94d; padding: 28px; position: sticky; top: 90px; }
+.summary-line, .summary-total { align-items: center; display: flex; justify-content: space-between; }
+.summary-line { border-bottom: 1px solid rgba(23,34,31,0.2); font-size: 0.82rem; padding: 14px 0; }
+.summary-line strong { font-size: 0.9rem; }
+.summary-line .free { color: #b84e35; }
+.summary-total { font-family: Georgia, serif; font-size: 1.4rem; padding: 22px 0 20px; }
+.place-order { background: #17221f; border: 0; color: white; cursor: pointer; font-size: 0.75rem; font-weight: 800; padding: 16px; text-align: left; text-transform: uppercase; width: 100%; }
+.place-order span { color: #e6b94d; float: right; font-size: 1.1rem; }
+.continue-shopping { color: #17221f; display: block; font-size: 0.72rem; margin-top: 20px; text-align: center; text-decoration: underline; }
+.empty-cart { border: 1px solid #d5d3cc; margin-top: 38px; padding: 90px 20px; text-align: center; }
+.empty-mark { color: #e6b94d; font-family: Georgia, serif; font-size: 5rem; letter-spacing: -0.08em; }
+.empty-cart h2 { font-family: Georgia, serif; font-size: 2.5rem; font-weight: 400; margin: 8px 0 10px; }
+.empty-cart p { color: #777d78; margin: 0 auto 25px; }
+.empty-link { display: inline-block; max-width: 250px; text-decoration: none; }
+
+@media (max-width: 768px) {
+	.cart-page { padding-top: 94px; }
+	.cart-layout { display: block; }
+	.order-summary { margin-top: 28px; position: static; }
+}

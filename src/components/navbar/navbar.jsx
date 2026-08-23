@@ -1,46 +1,37 @@
 import { Link } from "react-router-dom";
 import './navbar.css'
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function NavBar(props) {
-    const[category, setCategory] = useState([])
+    const [category, setCategory] = useState([])
+    const [isOpen, setIsOpen] = useState(false)
     useEffect(()=> {
         fetch('https://dummyjson.com/products/category-list')
         .then(res => res.json())
         .then(data =>{
         setCategory(data)
         });
-
-        let List = document.querySelector("ul")
-        List.style.top = "-1500px"
-        console.log(props)
     },[])
     return(
-        <nav className="navbar navbar-expand-lg">
-            <div className="container">
-                <Link className="navbar-brand" to="/">Home</Link>
-                <button className="btn btn-primary" onClick={()=> {
-                    let List = document.querySelector("ul")
-                    if(List.style.top == "-1500px") {
-                        List.style.top = "60px"
-                    } else {
-                        List.style.top = "-1500px"
-                    }                    
-                }}>Categories</button>
-                <ul>
+        <nav className="site-nav">
+            <div className="nav-inner container">
+                <Link className="nav-brand" to="/" onClick={() => setIsOpen(false)}><span>O</span>rdinary<br /><i>objects.</i></Link>
+                <div className="nav-actions">
+                    <button className={isOpen ? "category-toggle open" : "category-toggle"} onClick={() => setIsOpen(!isOpen)} aria-expanded={isOpen} aria-controls="category-menu">
+                        <span className="toggle-icon"><i></i><i></i></span> Browse categories
+                    </button>
+                    <Link className="cart-link" to="/cart"><span>Cart</span><b>{props.Cart}</b></Link>
+                </div>
+                <ul id="category-menu" className={isOpen ? "category-menu open" : "category-menu"}>
                     {
                         category.map((category)=>{
                             return(
-                                <li><Link onClick={()=> {
-let List = document.querySelector("ul")
-                                    List.style.top = "-1500px"
-                                }} to={`/category/${category}`} class=" category text-decoration-none">{category}</Link></li>
+                                <li key={category}><Link onClick={() => setIsOpen(false)} to={`/category/${category}`} className="category">{category.replaceAll('-', ' ')}</Link></li>
                             )
                         })
                     }
                 </ul>
-                <Link id="Cart-btn" className="nav-link" to="/cart">Cart {props.Cart}</Link>
-            </div>                                    
+            </div>
         </nav>
     )
 }

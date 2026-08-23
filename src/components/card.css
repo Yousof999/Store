@@ -1,11 +1,32 @@
 .main-Card {
-    min-height: 550px;
+    background: #fff;
+    border: 0;
+    border-radius: 0;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .img {
-    background-color: rgba(0, 0, 0, 0.338);
+    background: #e6e2d9;
+    height: 260px;
+    overflow: hidden;
 }
 
+.img img { height: 100%; object-fit: cover; transition: transform 0.45s ease; }
+.main-Card:hover .img img { transform: scale(1.05); }
+
 .content {
-    background-color: #cccccc30;
+    background: #fff;
+    padding: 22px 22px 24px;
+}
+
+.content h3 { color: #17221f; font-family: Georgia, serif; font-size: 1.2rem; font-weight: 400; line-height: 1.2; }
+.content h4 { color: #b84e35; font-size: 1rem; font-weight: 800; }
+.content .btn { border: 0; border-radius: 0; font-size: 0.73rem; font-weight: 800; letter-spacing: 0.04em; padding: 10px 13px; text-transform: uppercase; }
+.content .btn-primary { background: #17221f; }
+.content .btn-info { background: #e6b94d; color: #17221f; margin-left: 8px !important; }
+
+@media (max-width: 480px) {
+    .img { height: 280px; }
 }
