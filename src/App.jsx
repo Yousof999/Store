@@ -9,8 +9,6 @@ import Details from './pages/details/details'
 import Footer from './components/footer/footer'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   const[cart , setCart] = useState([])
 
     function addToCart(product) {

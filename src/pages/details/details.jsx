@@ -5,21 +5,39 @@ import './details.css'
 export default function Details(props) {
     const [product, setProduct] = useState(null)
     const [selectedImage, setSelectedImage] = useState("")
+    const [error, setError] = useState(null)
     const params = useParams()
-    useEffect(()=> {
-        fetch(`https://dummyjson.com/products/${params.id}`)
-        .then(res => res.json())
-        .then((data)=>{
-            setProduct(data)
-            setSelectedImage(data.thumbnail)
-        });
+    useEffect(() => {
+        let isActive = true
+        async function loadProduct() {
+            setError(null)
+            try {
+                const response = await fetch(`https://dummyjson.com/products/${params.id}`)
+                if (!response.ok) {
+                    throw new Error(`Request failed with status ${response.status}`)
+                }
+                const data = await response.json()
+                if (isActive) {
+                    setProduct(data)
+                    setSelectedImage(data.thumbnail)
+                }
+            } catch (error) {
+                if (isActive) {
+                    setError(error instanceof Error ? error.message : 'An unexpected error occurred')
+                }
+            }
+        }
+        loadProduct()
+        return () => {
+            isActive = false
+        }
     },[params.id])
 
     return (
         <main className="details-page">
             <div className="container">
                 <Link className="back-link" to="/">&#8592; Back to collection</Link>
-                {product ? (
+                {error ? <p className="loading-state" role="alert">Unable to load product: {error}</p> : product ? (
                     <article className="product-detail">
                         <div className="product-gallery">
                             <div className="gallery-main">

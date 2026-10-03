@@ -5,12 +5,29 @@ import { useEffect, useState } from "react";
 export default function NavBar(props) {
     const [category, setCategory] = useState([])
     const [isOpen, setIsOpen] = useState(false)
-    useEffect(()=> {
-        fetch('https://dummyjson.com/products/category-list')
-        .then(res => res.json())
-        .then(data =>{
-        setCategory(data)
-        });
+    const [error, setError] = useState(null)
+    useEffect(() => {
+        let isActive = true
+        async function loadCategories() {
+            try {
+                const response = await fetch('https://dummyjson.com/products/category-list')
+                if (!response.ok) {
+                    throw new Error(`Request failed with status ${response.status}`)
+                }
+                const data = await response.json()
+                if (isActive) {
+                    setCategory(data)
+                }
+            } catch (error) {
+                if (isActive) {
+                    setError(error instanceof Error ? error.message : 'An unexpected error occurred')
+                }
+            }
+        }
+        loadCategories()
+        return () => {
+            isActive = false
+        }
     },[])
     return(
         <nav className="site-nav">
@@ -23,13 +40,15 @@ export default function NavBar(props) {
                     <Link className="cart-link" to="/cart"><span>Cart</span><b>{props.Cart}</b></Link>
                 </div>
                 <ul id="category-menu" className={isOpen ? "category-menu open" : "category-menu"}>
-                    {
+                    {error
+                        ? <li role="alert">Unable to load categories: {error}</li>
+                        : (
                         category.map((category)=>{
                             return(
                                 <li key={category}><Link onClick={() => setIsOpen(false)} to={`/category/${category}`} className="category">{category.replaceAll('-', ' ')}</Link></li>
                             )
                         })
-                    }
+                    )}
                 </ul>
             </div>
         </nav>

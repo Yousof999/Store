@@ -5,14 +5,29 @@ import "./home.css";
 
 export default function Home(props) {
     const [products, setProducts] = useState([])
-    useEffect(()=> {
-        fetch('https://dummyjson.com/products')
-        .then((res) => {
-            return res.json()
-        })
-        .then((data)=> {
-            setProducts(data.products)
-        });
+    const [error, setError] = useState(null)
+    useEffect(() => {
+        let isActive = true
+        async function loadProducts() {
+            try {
+                const response = await fetch('https://dummyjson.com/products')
+                if (!response.ok) {
+                    throw new Error(`Request failed with status ${response.status}`)
+                }
+                const data = await response.json()
+                if (isActive) {
+                    setProducts(data.products)
+                }
+            } catch (error) {
+                if (isActive) {
+                    setError(error instanceof Error ? error.message : 'An unexpected error occurred')
+                }
+            }
+        }
+        loadProducts()
+        return () => {
+            isActive = false
+        }
     },[])
 
     const featuredProduct = products[0]
@@ -53,7 +68,9 @@ export default function Home(props) {
                     <span className="product-count">{products.length ? `${products.length} pieces` : "Curating now"}</span>
                 </div>
                 <div className="product-grid">
-                    {products.map((product) => <Card key={product.id} addToCart={props.addToCart} product={product} />)}
+                    {error
+                        ? <p role="alert">Unable to load products: {error}</p>
+                        : products.map((product) => <Card key={product.id} addToCart={props.addToCart} product={product} />)}
                 </div>
             </section>
         </main>
